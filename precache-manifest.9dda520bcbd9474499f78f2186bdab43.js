@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8af578fa2f19c69ae3374f6212aa7cf2",
+    "revision": "e4b25ee3714eaabb24ab9502e214fb23",
     "url": "/psycolor/index.html"
   },
   {
-    "revision": "2141a8660985833fb20b",
+    "revision": "b3b80b50651d7832b25d",
     "url": "/psycolor/static/css/main.b100e6da.chunk.css"
   },
   {
-    "revision": "ef576cc5577f287640ce",
-    "url": "/psycolor/static/js/2.77e94684.chunk.js"
+    "revision": "879f2de02eb192f7def0",
+    "url": "/psycolor/static/js/2.ea1915e9.chunk.js"
   },
   {
-    "revision": "2141a8660985833fb20b",
-    "url": "/psycolor/static/js/main.2a5fd280.chunk.js"
+    "revision": "b3b80b50651d7832b25d",
+    "url": "/psycolor/static/js/main.7622215c.chunk.js"
   },
   {
     "revision": "964e7bd5a667d7ee9111",
