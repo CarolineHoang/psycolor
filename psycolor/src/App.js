@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import ColorBox from './colorbox';
 import RandomColors from './randomColors';
+import UI from './userInterface';
 
 
 
@@ -27,7 +28,8 @@ function App() {
           Learn React
         </a>
       </header> */}
-      <RandomColors/>
+      {/* <RandomColors/> */}
+      <UI/>
     </div>
   );
 }

@@ -35,6 +35,14 @@ const Button = styled.button`
   width: 10vw; 
 `;
 
+const RedBox = styled.div`
+  top:0;
+  left:0;
+  background-color: red;
+  width: 30vw;
+  height: 100%;
+
+`;
 
 
 
@@ -49,7 +57,9 @@ class RandomColors extends Component {
 
     this.state = {
       clicked: null,
-      answer: null
+      answer: null,
+      hidden: "hidden",
+      box: "start"
     };
     this.toggleClass = this.toggleClass.bind(this);
     this.wrapperFunction = this.toggleClass.bind(this);
@@ -57,6 +67,10 @@ class RandomColors extends Component {
     this.getRandColorArray = this.getRandColorArray.bind(this);
     this.setAnswer = this.setAnswer.bind(this);
     this.printTester = this.printTester.bind(this);
+    this.show = this.show.bind(this);
+    this.getColorBox= this.getColorBox.bind(this);
+    this.waitBox= this.waitBox.bind(this);
+    this.showBox= this.showBox.bind(this);
   }
 
   toggleClass(event) {
@@ -85,9 +99,9 @@ class RandomColors extends Component {
 
   setAnswer(event, callBack){
     // console.log(event)
-    console.log(callBack)
-    this.setState({ answer: event.currentTarget.value });
-    this.printTester();
+    // console.log(callBack) // to use this we need the callback parameter but usually we don't need a callback paramenter to make a callback
+    this.setState({ answer: event.currentTarget.value },
+    function () {this.printTester()});
     // event.preventDefault();
   }
 
@@ -97,15 +111,43 @@ class RandomColors extends Component {
 
 //   condition of when to reload the page and thus update all the colors in the app
   shouldComponentUpdate(nextProps, nextState) { 
-    if (nextState.answer !== 0) { // in it's current state, this condition ins never true because the value is either true or false (the background is )
-      return false;
+    console.log("NEXT STATE ANSWER: " , nextState.answer , nextState.box, (nextState.box == "start" || nextState.answer != null))
+    console.log( (nextState.box == "start" ))
+    if (nextState.box == "start" ){
+      return true
     }
+    else if (nextState.box == "choose" || this.state.box == "choose") { // || nextState.answer == null   // in it's current state, this condition ins never true because the value is either true or false (the background is )
+    // this.setState({box : "start"});
+    return false;
+    }
+    console.log("this is evaluating TRUE RIGHT NOW")
+    this.setState({box : "choose"});
     return true;
   }
 
-//onClick= {this.getRandColor}
-  render() {
-    return (
+  // componentWillMount(){
+  //   console.log(this.props.wait);
+  //   setTimeout(this.show(), 
+  //              this.props.wait);
+  // }
+
+  show() {
+    this.setState({hidden : ""});
+  }
+
+  componentDidMount() {
+    // setTimeout(function(){ alert("After 5 seconds!"); }, 
+    //            this.props.wait);
+    // setTimeout(this.getColorBox(), 
+    //            this.props.wait);
+
+  }
+
+
+  getColorBox(){
+    console.log("now it loads")
+    
+    return(
       <Wrapper >
           {this.getRandColorArray()}
           
@@ -118,6 +160,59 @@ class RandomColors extends Component {
             
 
           </SelectionBox>
+      </Wrapper>
+
+    );
+  }
+  waitBox(callback){
+    // return setTimeout(function() {this.getColorBox(); callback()}, this.props.wait);
+    console.log(callback)
+    var divs = this.getColorBox();
+    console.log("divs: " ,divs)
+    return setTimeout(() => {
+      this.setState({box: divs}, function () {console.log(this.state.box)})    ;}    ,
+      // function() {
+      // // console.log(this.getColorBox);
+      // // var divs = this.getColorBox;
+      // console.log(divs);
+      // callback(divs); }, 
+      this.props.wait);
+
+    // this.getColorBox();
+    // console.log("something")
+    // return(
+    //   this.getColorBox()
+    // )
+
+    // return callback(divs)
+    
+  };
+  // waitBox(function(currentTime) {
+  //   console.log('The current time is: ' + currentTime);
+  // });
+
+  showBox(divs){
+    console.log("we made it to this point")
+    console.log(divs)
+    return divs
+      
+  }
+
+
+
+
+//onClick= {this.getRandColor}
+  render() {
+    return (
+      <Wrapper>
+        {/* <RedBox/> */}
+        {/* {this.getColorBox()} */}
+        {/* {this.waitBox()} */}
+        {this.waitBox(this.showBox   )}
+        {this.state.box}
+        {/* {this.getColorBox()} */}
+        {/* <RedBox/> */}
+
       </Wrapper>
     );
   }
